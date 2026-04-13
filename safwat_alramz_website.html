@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مؤسسة صفوة الرمز | Safwat Al-Ramz</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0B2545; --blue: #1565C0; --blue-light: #1E88E5;
+    --gold: #F9A825; --gold-light: #FFD54F;
+    --white: #FFFFFF; --offwhite: #F5F7FA;
+    --gray: #6B7280; --gray-light: #E8ECF0; --text: #1A1A2E; --radius: 10px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Cairo','Tajawal',sans-serif; color: var(--text); background: var(--white); line-height: 1.7; direction: rtl; }
+  body.en { direction: ltr; }
+
+  .lang-bar { background: var(--navy); padding: 8px 24px; display: flex; justify-content: flex-end; gap: 8px; }
+  .lang-btn { padding: 4px 14px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.3); background: transparent; color: rgba(255,255,255,0.7); font-family: 'Cairo',sans-serif; font-size: 13px; cursor: pointer; transition: all .2s; }
+  .lang-btn.active { background: var(--gold); border-color: var(--gold); color: var(--navy); font-weight: 600; }
+
+  nav { background: var(--white); border-bottom: 2px solid var(--gold); padding: 14px 32px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .logo-wrap { display: flex; align-items: center; gap: 12px; }
+  .logo-icon { width: 48px; height: 48px; background: var(--navy); border-radius: var(--radius); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .logo-icon svg { width: 26px; height: 26px; }
+  .logo-name { font-size: 17px; font-weight: 700; color: var(--navy); line-height: 1.2; }
+  .logo-sub { font-size: 12px; color: var(--gray); }
+  .nav-links { display: flex; gap: 24px; }
+  .nav-links a { font-size: 14px; color: var(--gray); text-decoration: none; font-weight: 500; cursor: pointer; }
+  .nav-links a:hover { color: var(--blue); }
+  .nav-cta { padding: 9px 22px; background: var(--gold); color: var(--navy); border: none; border-radius: var(--radius); font-family: 'Cairo',sans-serif; font-size: 14px; font-weight: 700; cursor: pointer; }
+  .nav-cta:hover { background: var(--gold-light); }
+
+  .hero { background: var(--navy); color: white; padding: 60px 32px; position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; top: -60px; left: -60px; width: 300px; height: 300px; background: radial-gradient(circle, rgba(249,168,37,0.15) 0%, transparent 70%); pointer-events: none; }
+  .hero-inner { max-width: 760px; position: relative; z-index: 1; }
+  .hero-badge { display: inline-block; background: rgba(249,168,37,0.15); border: 1px solid rgba(249,168,37,0.4); color: var(--gold-light); font-size: 12px; font-weight: 600; padding: 5px 14px; border-radius: 20px; margin-bottom: 16px; }
+  .hero h1 { font-size: 32px; font-weight: 700; line-height: 1.3; margin-bottom: 14px; }
+  .hero h1 span { color: var(--gold); }
+  .hero p { font-size: 15px; color: rgba(255,255,255,0.75); margin-bottom: 28px; max-width: 520px; }
+  .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn-gold { padding: 12px 28px; background: var(--gold); color: var(--navy); border: none; border-radius: var(--radius); font-family: 'Cairo',sans-serif; font-size: 15px; font-weight: 700; cursor: pointer; text-decoration: none; display: inline-block; }
+  .btn-gold:hover { background: var(--gold-light); }
+  .btn-outline { padding: 12px 28px; background: transparent; color: white; border: 1.5px solid rgba(255,255,255,0.4); border-radius: var(--radius); font-family: 'Cairo',sans-serif; font-size: 15px; font-weight: 600; cursor: pointer; text-decoration: none; display: inline-block; }
+  .btn-outline:hover { border-color: white; }
+
+  .stats { display: grid; grid-template-columns: repeat(3,1fr); border-bottom: 1px solid var(--gray-light); }
+  .stat { padding: 20px 16px; text-align: center; border-left: 1px solid var(--gray-light); }
+  .stat:last-child { border-left: none; }
+  body.en .stat { border-left: none; border-right: 1px solid var(--gray-light); }
+  body.en .stat:last-child { border-right: none; }
+  .stat-num { font-size: 26px; font-weight: 700; color: var(--blue); }
+  .stat-lbl { font-size: 13px; color: var(--gray); }
+
+  section { padding: 48px 32px; }
+  .sec-label { font-size: 12px; font-weight: 600; color: var(--blue); letter-spacing: .06em; text-transform: uppercase; margin-bottom: 6px; }
+  .sec-title { font-size: 22px; font-weight: 700; color: var(--navy); margin-bottom: 24px; }
+
+  .services-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap: 16px; }
+  .svc-card { background: var(--white); border: 1px solid var(--gray-light); border-radius: 14px; padding: 22px; transition: all .2s; position: relative; }
+  .svc-card:hover { border-color: var(--blue-light); box-shadow: 0 4px 20px rgba(21,101,192,0.1); transform: translateY(-2px); }
+  .svc-icon { width: 44px; height: 44px; border-radius: var(--radius); display: flex; align-items: center; justify-content: center; margin-bottom: 14px; font-size: 22px; }
+  .svc-title { font-size: 15px; font-weight: 700; margin-bottom: 6px; color: var(--navy); }
+  .svc-desc { font-size: 13px; color: var(--gray); line-height: 1.6; }
+
+  .products-bg { background: var(--offwhite); }
+  .products-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(150px,1fr)); gap: 14px; }
+  .prod-card { background: var(--white); border: 1px solid var(--gray-light); border-radius: 14px; overflow: hidden; transition: all .2s; position: relative; }
+  .prod-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.08); transform: translateY(-2px); }
+  .prod-img { height: 80px; display: flex; align-items: center; justify-content: center; }
+  .prod-img svg { width: 44px; height: 44px; }
+  .prod-body { padding: 12px 14px; }
+  .prod-name { font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 2px; }
+  .prod-cat { font-size: 11px; color: var(--gray); }
+
+  .why-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(200px,1fr)); gap: 16px; }
+  .why-item { background: var(--white); border: 1px solid var(--gray-light); border-radius: 14px; padding: 18px; display: flex; gap: 12px; align-items: flex-start; position: relative; }
+  .why-num { width: 34px; height: 34px; flex-shrink: 0; background: var(--navy); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; }
+  .why-t { font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 3px; }
+  .why-s { font-size: 12px; color: var(--gray); line-height: 1.5; }
+
+  .contact-bg { background: var(--navy); color: white; }
+  .contact-bg .sec-label { color: var(--gold-light); }
+  .contact-bg .sec-title { color: white; }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+  .contact-form { display: flex; flex-direction: column; gap: 12px; }
+  .contact-form input, .contact-form textarea { width: 100%; padding: 11px 14px; border: 1px solid rgba(255,255,255,0.15); border-radius: var(--radius); background: rgba(255,255,255,0.06); color: white; font-family: 'Cairo',sans-serif; font-size: 14px; outline: none; }
+  .contact-form input:focus, .contact-form textarea:focus { border-color: var(--gold); }
+  .contact-form input::placeholder, .contact-form textarea::placeholder { color: rgba(255,255,255,0.4); }
+  .contact-form textarea { height: 90px; resize: none; }
+  .contact-form button { padding: 12px; background: var(--gold); color: var(--navy); border: none; border-radius: var(--radius); font-family: 'Cairo',sans-serif; font-size: 15px; font-weight: 700; cursor: pointer; }
+  .contact-info { display: flex; flex-direction: column; gap: 18px; }
+  .info-card { display: flex; gap: 14px; align-items: flex-start; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 14px 16px; }
+  .info-icon { width: 38px; height: 38px; flex-shrink: 0; background: rgba(249,168,37,0.15); border-radius: var(--radius); display: flex; align-items: center; justify-content: center; }
+  .info-icon svg { width: 18px; height: 18px; stroke: var(--gold); stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .info-lbl { font-size: 11px; color: rgba(255,255,255,0.5); margin-bottom: 3px; }
+  .info-val { font-size: 14px; font-weight: 600; color: white; }
+  .info-val a { color: var(--gold-light); text-decoration: none; }
+
+  .wa-float { position: fixed; bottom: 24px; left: 24px; z-index: 999; }
+  body.en .wa-float { left: auto; right: 24px; }
+  .wa-btn { width: 54px; height: 54px; background: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 16px rgba(37,211,102,0.4); cursor: pointer; text-decoration: none; transition: transform .2s; }
+  .wa-btn:hover { transform: scale(1.08); }
+  .wa-btn svg { width: 28px; height: 28px; fill: white; }
+
+  footer { background: #071A36; color: rgba(255,255,255,0.5); padding: 16px 32px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; flex-wrap: wrap; gap: 8px; }
+  footer span { color: var(--gold); font-weight: 600; }
+
+  .ar-text { display: block; }
+  .en-text { display: none; }
+  body.en .ar-text { display: none; }
+  body.en .en-text { display: block; }
+
+  @media(max-width:600px) { .contact-grid { grid-template-columns: 1fr; } .hero h1 { font-size: 22px; } .stats { grid-template-columns: 1fr; } .nav-links { display: none; } }
+
+  /* ═══════════════════════════════
+     EDIT BUTTONS — hover on any section
+  ═══════════════════════════════ */
+  .edit-btn {
+    position: absolute; top: 10px; right: 10px;
+    background: var(--gold); color: var(--navy);
+    border: none; border-radius: 20px;
+    padding: 4px 12px; font-size: 11px; font-weight: 700;
+    cursor: pointer; font-family: 'Cairo',sans-serif;
+    opacity: 0; transition: opacity .2s; z-index: 10;
+    display: flex; align-items: center; gap: 4px;
+  }
+  body.en .edit-btn { right: auto; left: 10px; }
+  .svc-card:hover .edit-btn,
+  .prod-card:hover .edit-btn,
+  .why-item:hover .edit-btn { opacity: 1; }
+
+  /* hero edit always visible on hover */
+  .hero-inner { position: relative; }
+
+  /* ═══════════════════════════════
+     ADMIN PANEL
+  ═══════════════════════════════ */
+  .admin-fab {
+    position: fixed; bottom: 90px; left: 24px; z-index: 998;
+    background: var(--navy); color: white; border: none;
+    border-radius: 28px; padding: 11px 18px;
+    font-family: 'Cairo',sans-serif; font-size: 13px; font-weight: 600;
+    cursor: pointer; box-shadow: 0 4px 14px rgba(11,37,69,0.35);
+    display: flex; align-items: center; gap: 7px; transition: background .2s;
+  }
+  body.en .admin-fab { left: auto; right: 90px; }
+  .admin-fab:hover { background: var(--blue); }
+
+  .overlay {
+    display: none; position: fixed; inset: 0; z-index: 1000;
+    background: rgba(0,0,0,0.55); align-items: center; justify-content: center;
+  }
+  .overlay.open { display: flex; }
+  .panel {
+    background: white; border-radius: 16px; padding: 0;
+    width: 94%; max-width: 520px; max-height: 90vh;
+    overflow: hidden; display: flex; flex-direction: column;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+  }
+  .panel-head {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 18px 22px; border-bottom: 1px solid var(--gray-light);
+    background: var(--navy); border-radius: 16px 16px 0 0;
+  }
+  .panel-title { font-size: 16px; font-weight: 700; color: white; }
+  .panel-tabs { display: flex; gap: 4px; padding: 12px 22px; border-bottom: 1px solid var(--gray-light); flex-wrap: wrap; }
+  .ptab { padding: 6px 14px; border-radius: 20px; border: 1px solid var(--gray-light); background: transparent; color: var(--gray); font-family: 'Cairo',sans-serif; font-size: 12px; cursor: pointer; transition: all .15s; }
+  .ptab.active { background: var(--navy); color: white; border-color: var(--navy); font-weight: 600; }
+  .panel-body { padding: 18px 22px; overflow-y: auto; flex: 1; }
+  .tab-pane { display: none; }
+  .tab-pane.active { display: block; }
+  .close-btn { width: 30px; height: 30px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.3); background: transparent; color: white; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+  .close-btn:hover { background: rgba(255,255,255,0.1); }
+
+  .field-group { margin-bottom: 14px; }
+  .field-label { font-size: 12px; font-weight: 600; color: var(--navy); margin-bottom: 5px; display: block; }
+  .field-input { width: 100%; padding: 9px 12px; border: 1px solid var(--gray-light); border-radius: 8px; font-family: 'Cairo',sans-serif; font-size: 13px; color: var(--text); outline: none; }
+  .field-input:focus { border-color: var(--blue); }
+  .save-btn { width: 100%; padding: 11px; background: var(--navy); color: white; border: none; border-radius: 8px; font-family: 'Cairo',sans-serif; font-size: 14px; font-weight: 700; cursor: pointer; margin-top: 4px; }
+  .save-btn:hover { background: var(--blue); }
+  .del-btn { padding: 4px 10px; background: #FEF2F2; color: #DC2626; border: 1px solid #FECACA; border-radius: 6px; font-size: 12px; cursor: pointer; font-family: 'Cairo',sans-serif; }
+  .del-btn:hover { background: #FEE2E2; }
+
+  .list-row { display: flex; align-items: center; justify-content: space-between; padding: 10px 12px; border: 1px solid var(--gray-light); border-radius: 8px; margin-bottom: 8px; background: var(--offwhite); }
+  .list-row-name { font-size: 13px; font-weight: 600; color: var(--navy); }
+  .list-row-sub { font-size: 11px; color: var(--gray); }
+
+  .color-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 4px; }
+  .c-dot { width: 26px; height: 26px; border-radius: 50%; cursor: pointer; border: 2px solid transparent; transition: border-color .15s; }
+  .c-dot.sel { border-color: var(--navy); }
+  .icon-row { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 4px; }
+  .i-opt { font-size: 20px; cursor: pointer; padding: 4px 7px; border-radius: 6px; border: 2px solid transparent; transition: border-color .15s; }
+  .i-opt.sel { border-color: var(--navy); }
+
+  .divider { border: none; border-top: 1px solid var(--gray-light); margin: 14px 0; }
+  .section-sub { font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 10px; }
+</style>
+</head>
+<body id="BODY">
+
+<!-- Lang Bar -->
+<div class="lang-bar">
+  <button class="lang-btn active" id="btn-ar" onclick="setLang('ar')">العربية</button>
+  <button class="lang-btn" id="btn-en" onclick="setLang('en')">English</button>
+</div>
+
+<!-- Nav -->
+<nav>
+  <div class="logo-wrap">
+    <div class="logo-icon">
+      <svg viewBox="0 0 26 26" fill="none">
+        <path d="M13 3v6M13 17v6M3 13h6M17 13h6" stroke="#F9A825" stroke-width="2.2" stroke-linecap="round"/>
+        <circle cx="13" cy="13" r="4" stroke="white" stroke-width="2"/>
+      </svg>
+    </div>
+    <div>
+      <div class="logo-name" id="SHOP_NAME_AR" style="display:block;">مؤسسة صفوة الرمز</div>
+      <div class="logo-name en-text" id="SHOP_NAME_EN" style="display:none;">Safwat Al-Ramz Est.</div>
+      <div class="logo-sub ar-text">السباكة والكهرباء</div>
+      <div class="logo-sub en-text">Plumbing & Electrical</div>
+    </div>
+  </div>
+  <div class="nav-links">
+    <a onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})"><span class="ar-text">خدماتنا</span><span class="en-text">Services</span></a>
+    <a onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})"><span class="ar-text">المنتجات</span><span class="en-text">Products</span></a>
+    <a onclick="document.getElementById('why').scrollIntoView({behavior:'smooth'})"><span class="ar-text">لماذا نحن</span><span class="en-text">Why Us</span></a>
+    <a onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})"><span class="ar-text">تواصل معنا</span><span class="en-text">Contact</span></a>
+  </div>
+  <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+    <span class="ar-text">اتصل بنا</span><span class="en-text">Call Us</span>
+  </button>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge" id="HERO_BADGE">Al Aarid, Riyadh</div>
+    <h1><span id="HERO_TITLE_AR" class="ar-text">كل ما تحتاجه للسباكة والكهرباء — في مكان واحد</span><span id="HERO_TITLE_EN" class="en-text">Everything for plumbing & electrical — in one place</span></h1>
+    <p><span class="ar-text" id="HERO_DESC_AR">منتجات أصلية عالية الجودة، ونصائح متخصصة لتوفير أفضل الحلول للمنازل والمشاريع في الرياض.</span><span class="en-text" id="HERO_DESC_EN">Original, high-quality products and expert advice for homes and projects across Riyadh.</span></p>
+    <div class="hero-btns">
+      <a class="btn-gold" id="HERO_PHONE_LINK" href="tel:0557273728"><span class="ar-text">📞 اتصل الآن</span><span class="en-text">📞 Call Now</span></a>
+      <a class="btn-outline" id="HERO_WA_LINK" href="https://wa.me/966557273728" target="_blank"><span class="ar-text">واتساب</span><span class="en-text">WhatsApp</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- Stats -->
+<div class="stats">
+  <div class="stat"><div class="stat-num" id="STAT1_NUM">+500</div><div class="stat-lbl"><span class="ar-text" id="STAT1_AR">منتج متوفر</span><span class="en-text" id="STAT1_EN">Products in stock</span></div></div>
+  <div class="stat"><div class="stat-num" id="STAT2_NUM">+10</div><div class="stat-lbl"><span class="ar-text" id="STAT2_AR">سنوات خبرة</span><span class="en-text" id="STAT2_EN">Years of experience</span></div></div>
+  <div class="stat"><div class="stat-num" id="STAT3_NUM">24h</div><div class="stat-lbl"><span class="ar-text" id="STAT3_AR">توصيل سريع</span><span class="en-text" id="STAT3_EN">Fast delivery</span></div></div>
+</div>
+
+<!-- Services -->
+<section id="services">
+  <div class="sec-label"><span class="ar-text">ما نقدمه</span><span class="en-text">What we offer</span></div>
+  <div class="sec-title"><span class="ar-text">خدماتنا</span><span class="en-text">Our Services</span></div>
+  <div class="services-grid" id="SERVICES_GRID">
+    <div class="svc-card" data-id="s1">
+      <button class="edit-btn" onclick="openEditService('s1')">✏️ <span class="ar-text">تعديل</span><span class="en-text">Edit</span></button>
+      <div class="svc-icon" style="background:#E3F2FD;">⚡</div>
+      <div class="svc-title"><span class="ar-text">مواد كهربائية</span><span class="en-text">Electrical supplies</span></div>
+      <div class="svc-desc"><span class="ar-text">كابلات، مفاتيح، قواطع، مآخذ، إضاءة ولوحات توزيع.</span><span class="en-text">Cables, switches, breakers, sockets, lighting & distribution boards.</span></div>
+    </div>
+    <div class="svc-card" data-id="s2">
+      <button class="edit-btn" onclick="openEditService('s2')">✏️ <span class="ar-text">تعديل</span><span class="en-text">Edit</span></button>
+      <div class="svc-icon" style="background:#E8F5E9;">🔧</div>
+      <div class="svc-title"><span class="ar-text">مواد سباكة</span><span class="en-text">Plumbing supplies</span></div>
+      <div class="svc-desc"><span class="ar-text">أنابيب، تركيبات، صمامات، حنفيات، سخانات ومضخات مياه.</span><span class="en-text">Pipes, fittings, valves, taps, water heaters and pumps.</span></div>
+    </div>
+    <div class="svc-card" data-id="s3">
+      <button class="edit-btn" onclick="openEditService('s3')">✏️ <span class="ar-text">تعديل</span><span class="en-text">Edit</span></button>
+      <div class="svc-icon" style="background:#FFF8E1;">📦</div>
+      <div class="svc-title"><span class="ar-text">طلبات الجملة والمقاولين</span><span class="en-text">Bulk & trade orders</span></div>
+      <div class="svc-desc"><span class="ar-text">أسعار خاصة للمقاولين والمطورين والشركات.</span><span class="en-text">Special pricing for contractors, developers and businesses.</span></div>
+    </div>
+    <div class="svc-card" data-id="s4">
+      <button class="edit-btn" onclick="openEditService('s4')">✏️ <span class="ar-text">تعديل</span><span class="en-text">Edit</span></button>
+      <div class="svc-icon" style="background:#FCE4EC;">🏠</div>
+      <div class="svc-title"><span class="ar-text">خدمات المنازل والمشاريع</span><span class="en-text">Home & project services</span></div>
+      <div class="svc-desc"><span class="ar-text">توريد المواد للمشاريع السكنية والتجارية.</span><span class="en-text">Supply for residential and commercial projects.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- Products -->
+<section id="products" class="products-bg">
+  <div class="sec-label"><span class="ar-text">أبرز المنتجات</span><span class="en-text">Top items</span></div>
+  <div class="sec-title"><span class="ar-text">منتجات مميزة</span><span class="en-text">Featured Products</span></div>
+  <div class="products-grid" id="PRODUCTS_GRID">
+    <div class="prod-card" data-id="p1">
+      <button class="edit-btn" onclick="openEditProduct('p1')">✏️</button>
+      <div class="prod-img" style="background:#FFF3E0;"><span style="font-size:30px;">🔌</span></div>
+      <div class="prod-body"><div class="prod-name"><span class="ar-text">أجهزة كهربائية منزلية</span><span class="en-text">Home electrical appliances</span></div><div class="prod-cat"><span class="ar-text">كهرباء منزلية</span><span class="en-text">Home electrical</span></div></div>
+    </div>
+    <div class="prod-card" data-id="p2">
+      <button class="edit-btn" onclick="openEditProduct('p2')">✏️</button>
+      <div class="prod-img" style="background:#E8F5E9;"><span style="font-size:30px;">🚿</span></div>
+      <div class="prod-body"><div class="prod-name"><span class="ar-text">مواد السباكة</span><span class="en-text">Plumbing supplies</span></div><div class="prod-cat"><span class="ar-text">سباكة</span><span class="en-text">Plumbing</span></div></div>
+    </div>
+    <div class="prod-card" data-id="p3">
+      <button class="edit-btn" onclick="openEditProduct('p3')">✏️</button>
+      <div class="prod-img" style="background:#FFF8E1;"><span style="font-size:30px;">🔩</span></div>
+      <div class="prod-body"><div class="prod-name"><span class="ar-text">صنابير ومحابس</span><span class="en-text">Taps & valves</span></div><div class="prod-cat"><span class="ar-text">سباكة</span><span class="en-text">Plumbing</span></div></div>
+    </div>
+    <div class="prod-card" data-id="p4">
+      <button class="edit-btn" onclick="openEditProduct('p4')">✏️</button>
+      <div class="prod-img" style="background:#ECEFF1;"><span style="font-size:30px;">🔨</span></div>
+      <div class="prod-body"><div class="prod-name"><span class="ar-text">مسامير وبراغي</span><span class="en-text">Nails & screws</span></div><div class="prod-cat"><span class="ar-text">عدد ومعدات</span><span class="en-text">Hardware</span></div></div>
+    </div>
+    <div class="prod-card" data-id="p5">
+      <button class="edit-btn" onclick="openEditProduct('p5')">✏️</button>
+      <div class="prod-img" style="background:#F3E5F5;"><span style="font-size:30px;">💧</span></div>
+      <div class="prod-body"><div class="prod-name"><span class="ar-text">مضخات مياه</span><span class="en-text">Water pumps</span></div><div class="prod-cat"><span class="ar-text">سباكة</span><span class="en-text">Plumbing</span></div></div>
+    </div>
+    <div class="prod-card" data-id="p6">
+      <button class="edit-btn" onclick="openEditProduct('p6')">✏️</button>
+      <div class="prod-img" style="background:#E0F2F1;"><span style="font-size:30px;">🌡️</span></div>
+      <div class="prod-body"><div class="prod-name"><span class="ar-text">سخانات كهربائية</span><span class="en-text">Water heaters</span></div><div class="prod-cat"><span class="ar-text">كهرباء</span><span class="en-text">Electrical</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Why Us -->
+<section id="why">
+  <div class="sec-label"><span class="ar-text">لماذا تختارنا</span><span class="en-text">Why choose us</span></div>
+  <div class="sec-title"><span class="ar-text">ثقة عملاؤنا بنا</span><span class="en-text">Why customers trust us</span></div>
+  <div class="why-grid">
+    <div class="why-item" data-id="w1">
+      <button class="edit-btn" onclick="openEditWhy('w1')">✏️</button>
+      <div class="why-num">1</div>
+      <div><div class="why-t"><span class="ar-text">ماركات أصلية فقط</span><span class="en-text">Original brands only</span></div><div class="why-s"><span class="ar-text">شنايدر، ليغراند، غروهي وغيرها</span><span class="en-text">Schneider, Legrand, Grohe & more</span></div></div>
+    </div>
+    <div class="why-item" data-id="w2">
+      <button class="edit-btn" onclick="openEditWhy('w2')">✏️</button>
+      <div class="why-num">2</div>
+      <div><div class="why-t"><span class="ar-text">خبرة ونصيحة متخصصة</span><span class="en-text">Expert advice</span></div><div class="why-s"><span class="ar-text">فريقنا يساعدك في اختيار القطعة المناسبة</span><span class="en-text">Our team helps you find the right part</span></div></div>
+    </div>
+    <div class="why-item" data-id="w3">
+      <button class="edit-btn" onclick="openEditWhy('w3')">✏️</button>
+      <div class="why-num">3</div>
+      <div><div class="why-t"><span class="ar-text">متوفر للاستلام الفوري</span><span class="en-text">Ready for same-day pickup</span></div><div class="why-s"><span class="ar-text">معظم المنتجات متاحة للاستلام اليوم</span><span class="en-text">Most items available to collect today</span></div></div>
+    </div>
+    <div class="why-item" data-id="w4">
+      <button class="edit-btn" onclick="openEditWhy('w4')">✏️</button>
+      <div class="why-num">4</div>
+      <div><div class="why-t"><span class="ar-text">حسابات تجارية للمقاولين</span><span class="en-text">Trade accounts</span></div><div class="why-s"><span class="ar-text">شروط ائتمانية خاصة للمقاولين</span><span class="en-text">Credit terms for contractors</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contact" class="contact-bg">
+  <div class="sec-label"><span class="ar-text">تواصل معنا</span><span class="en-text">Get in touch</span></div>
+  <div class="sec-title"><span class="ar-text">نحن هنا لمساعدتك</span><span class="en-text">We're here to help</span></div>
+  <div class="contact-grid">
+    <div class="contact-form">
+      <input type="text" placeholder="الاسم / Name"/>
+      <input type="tel" placeholder="رقم الجوال / Phone number"/>
+      <textarea placeholder="ما الذي تحتاجه؟ / What do you need?"></textarea>
+      <button onclick="alert('شكراً! سنتواصل معك قريباً.\nThank you! We will contact you soon.')"><span class="ar-text">إرسال ←</span><span class="en-text">Send →</span></button>
+    </div>
+    <div class="contact-info">
+      <div class="info-card">
+        <div class="info-icon"><svg viewBox="0 0 18 18"><path d="M9 2C6 2 3.5 4.5 3.5 7.5c0 4.5 5.5 8.5 5.5 8.5s5.5-4 5.5-8.5C14.5 4.5 12 2 9 2z"/><circle cx="9" cy="7.5" r="2" fill="#F9A825"/></svg></div>
+        <div><div class="info-lbl"><span class="ar-text">العنوان</span><span class="en-text">Address</span></div><div class="info-val" id="CONTACT_ADDRESS"><span class="ar-text">مؤسسة صفوة الرمز، العارض، الرياض 13342</span><span class="en-text">Safwat Al-Ramz, Al Aarid, Riyadh 13342</span></div></div>
+      </div>
+      <div class="info-card">
+        <div class="info-icon"><svg viewBox="0 0 18 18"><path d="M3.5 2.5h3L8 6l-1.5 1a9 9 0 004 4L12 9.5l3.5 1.5v3a1 1 0 01-1 1C7 15 3 9 3 4a1 1 0 01.5-1.5z"/></svg></div>
+        <div><div class="info-lbl"><span class="ar-text">الهاتف</span><span class="en-text">Phone</span></div><div class="info-val"><a id="CONTACT_PHONE_LINK" href="tel:0557273728">0557273728</a></div></div>
+      </div>
+      <div class="info-card">
+        <div class="info-icon"><svg viewBox="0 0 18 18" fill="white"><path d="M9 1C4.6 1 1 4.1 1 8c0 1.9.8 3.6 2.1 4.9L2 17l4.3-1.4C7.4 16.2 8.2 16.3 9 16.3c4.4 0 8-3.1 8-7.1C17 4.8 13.4 1 9 1z"/></svg></div>
+        <div><div class="info-lbl">WhatsApp</div><div class="info-val"><a id="CONTACT_WA_LINK" href="https://wa.me/966557273728" target="_blank">0557273728</a></div></div>
+      </div>
+      <div class="info-card">
+        <div class="info-icon"><svg viewBox="0 0 18 18"><circle cx="9" cy="9" r="6.5"/><path d="M9 5v4l2.5 2.5"/></svg></div>
+        <div>
+          <div class="info-lbl"><span class="ar-text">ساعات العمل</span><span class="en-text">Working hours</span></div>
+          <div class="info-val">
+            <span class="ar-text" id="HOURS_WEEKDAYS_AR">السبت – الخميس: 6:30 ص – 10 م</span>
+            <span class="en-text" id="HOURS_WEEKDAYS_EN">Sat – Thu: 6:30am – 10:00pm</span>
+            <br>
+            <span class="ar-text" id="HOURS_FRIDAY_AR">الجمعة: 1 م – 10 م</span>
+            <span class="en-text" id="HOURS_FRIDAY_EN">Friday: 1:00pm – 10:00pm</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div><span class="ar-text">© 2026 <span id="FOOTER_NAME_AR">مؤسسة صفوة الرمز</span> — جميع الحقوق محفوظة</span><span class="en-text">© 2026 <span id="FOOTER_NAME_EN">Safwat Al-Ramz Est.</span> — All rights reserved</span></div>
+  <div><span class="ar-text">العارض، الرياض 13342 | <span id="FOOTER_PHONE">0557273728</span></span><span class="en-text">Al Aarid, Riyadh 13342 | <span>0557273728</span></span></div>
+</footer>
+
+<!-- WhatsApp Float -->
+<a class="wa-float" id="WA_FLOAT" href="https://wa.me/966557273728" target="_blank">
+  <div class="wa-btn"><svg viewBox="0 0 32 32"><path d="M16 1C7.7 1 1 7.7 1 16c0 2.6.7 5.1 1.9 7.3L2 31l7.9-2c2.1 1.1 4.5 1.7 7.1 1.7 8.3 0 15-6.7 15-15S24.3 1 16 1zm7.7 20.8c-.3.9-1.8 1.7-2.5 1.8-.6.1-1.4.1-2.3-.1-.5-.1-1.2-.4-2-.8-3.5-1.5-5.8-5-6-5.2-.2-.3-1.6-2.1-1.6-4s1-3 1.4-3.4c.3-.4.7-.5.9-.5h.7c.2 0 .5 0 .7.6.3.6 1 2.5 1.1 2.6.1.2.1.4 0 .6-.1.2-.2.4-.4.6-.2.2-.4.5-.5.6-.2.2-.3.4-.1.8.2.4.9 1.5 1.9 2.4 1.3 1.2 2.4 1.5 2.8 1.7.3.2.6.1.8-.1.2-.3.9-1 1.1-1.4.2-.3.5-.3.8-.2.3.1 2 .9 2.3 1.1.3.2.5.3.6.4.1.3.1 1.2-.2 2.1z"/></svg></div>
+</a>
+
+<!-- ══════════════ ADMIN FAB ══════════════ -->
+<button class="admin-fab" onclick="openPanel()">
+  ⚙️ <span class="ar-text">تعديل الموقع</span><span class="en-text">Edit website</span>
+</button>
+
+<!-- ══════════════ MAIN ADMIN PANEL ══════════════ -->
+<div class="overlay" id="MAIN_OVERLAY" onclick="if(event.target===this)closePanel()">
+  <div class="panel">
+    <div class="panel-head">
+      <div class="panel-title">⚙️ <span class="ar-text">تعديل الموقع</span><span class="en-text">Edit website</span></div>
+      <button class="close-btn" onclick="closePanel()">×</button>
+    </div>
+    <div class="panel-tabs">
+      <button class="ptab active" onclick="showTab('t-info')"><span class="ar-text">معلومات المحل</span><span class="en-text">Shop info</span></button>
+      <button class="ptab" onclick="showTab('t-stats')"><span class="ar-text">الإحصائيات</span><span class="en-text">Stats</span></button>
+      <button class="ptab" onclick="showTab('t-hours')"><span class="ar-text">أوقات العمل</span><span class="en-text">Hours</span></button>
+      <button class="ptab" onclick="showTab('t-prod')"><span class="ar-text">منتج جديد</span><span class="en-text">Add product</span></button>
+      <button class="ptab" onclick="showTab('t-svc')"><span class="ar-text">خدمة جديدة</span><span class="en-text">Add service</span></button>
+    </div>
+    <div class="panel-body">
+
+      <!-- TAB: Shop Info -->
+      <div class="tab-pane active" id="t-info">
+        <div class="field-group"><label class="field-label">اسم المحل بالعربية / Shop name AR</label><input class="field-input" id="f_name_ar" value="مؤسسة صفوة الرمز"/></div>
+        <div class="field-group"><label class="field-label">Shop name English</label><input class="field-input" id="f_name_en" value="Safwat Al-Ramz Est."/></div>
+        <div class="field-group"><label class="field-label">رقم الهاتف / Phone</label><input class="field-input" id="f_phone" value="0557273728"/></div>
+        <div class="field-group"><label class="field-label">العنوان بالعربية / Address AR</label><input class="field-input" id="f_addr_ar" value="مؤسسة صفوة الرمز، العارض، الرياض 13342"/></div>
+        <div class="field-group"><label class="field-label">Address English</label><input class="field-input" id="f_addr_en" value="Safwat Al-Ramz, Al Aarid, Riyadh 13342"/></div>
+        <div class="field-group"><label class="field-label">Hero badge text</label><input class="field-input" id="f_badge" value="Al Aarid, Riyadh"/></div>
+        <button class="save-btn" onclick="saveInfo()"><span class="ar-text">حفظ المعلومات ✓</span><span class="en-text">Save info ✓</span></button>
+      </div>
+
+      <!-- TAB: Stats -->
+      <div class="tab-pane" id="t-stats">
+        <div class="section-sub"><span class="ar-text">الإحصاء الأول</span><span class="en-text">Stat 1</span></div>
+        <div class="field-group"><label class="field-label">الرقم / Number</label><input class="field-input" id="f_s1num" value="+500"/></div>
+        <div class="field-group"><label class="field-label">التسمية AR</label><input class="field-input" id="f_s1ar" value="منتج متوفر"/></div>
+        <div class="field-group"><label class="field-label">Label EN</label><input class="field-input" id="f_s1en" value="Products in stock"/></div>
+        <hr class="divider"/>
+        <div class="section-sub"><span class="ar-text">الإحصاء الثاني</span><span class="en-text">Stat 2</span></div>
+        <div class="field-group"><label class="field-label">الرقم / Number</label><input class="field-input" id="f_s2num" value="+10"/></div>
+        <div class="field-group"><label class="field-label">التسمية AR</label><input class="field-input" id="f_s2ar" value="سنوات خبرة"/></div>
+        <div class="field-group"><label class="field-label">Label EN</label><input class="field-input" id="f_s2en" value="Years of experience"/></div>
+        <hr class="divider"/>
+        <div class="section-sub"><span class="ar-text">الإحصاء الثالث</span><span class="en-text">Stat 3</span></div>
+        <div class="field-group"><label class="field-label">الرقم / Number</label><input class="field-input" id="f_s3num" value="24h"/></div>
+        <div class="field-group"><label class="field-label">التسمية AR</label><input class="field-input" id="f_s3ar" value="توصيل سريع"/></div>
+        <div class="field-group"><label class="field-label">Label EN</label><input class="field-input" id="f_s3en" value="Fast delivery"/></div>
+        <button class="save-btn" onclick="saveStats()"><span class="ar-text">حفظ الإحصائيات ✓</span><span class="en-text">Save stats ✓</span></button>
+      </div>
+
+      <!-- TAB: Hours -->
+      <div class="tab-pane" id="t-hours">
+        <div class="field-group"><label class="field-label">أيام الأسبوع AR (السبت–الخميس)</label><input class="field-input" id="f_wdAR" value="السبت – الخميس: 6:30 ص – 10 م"/></div>
+        <div class="field-group"><label class="field-label">Weekdays EN (Sat–Thu)</label><input class="field-input" id="f_wdEN" value="Sat – Thu: 6:30am – 10:00pm"/></div>
+        <div class="field-group"><label class="field-label">الجمعة AR</label><input class="field-input" id="f_frAR" value="الجمعة: 1 م – 10 م"/></div>
+        <div class="field-group"><label class="field-label">Friday EN</label><input class="field-input" id="f_frEN" value="Friday: 1:00pm – 10:00pm"/></div>
+        <button class="save-btn" onclick="saveHours()"><span class="ar-text">حفظ الأوقات ✓</span><span class="en-text">Save hours ✓</span></button>
+      </div>
+
+      <!-- TAB: Add Product -->
+      <div class="tab-pane" id="t-prod">
+        <div class="field-group"><label class="field-label">اسم المنتج بالعربية</label><input class="field-input" id="np_ar" placeholder="مثال: كابل كهربائي"/></div>
+        <div class="field-group"><label class="field-label">Product name English</label><input class="field-input" id="np_en" placeholder="e.g. Electric cable"/></div>
+        <div class="field-group">
+          <label class="field-label">الفئة / Category</label>
+          <select class="field-input" id="np_cat">
+            <option value="كهرباء|Electrical">كهرباء / Electrical</option>
+            <option value="سباكة|Plumbing">سباكة / Plumbing</option>
+            <option value="كهرباء منزلية|Home electrical">كهرباء منزلية / Home electrical</option>
+            <option value="عدد ومعدات|Hardware">عدد ومعدات / Hardware</option>
+            <option value="أمان|Safety">أمان / Safety</option>
+          </select>
+        </div>
+        <div class="field-group">
+          <label class="field-label">لون البطاقة / Card color</label>
+          <div class="color-row" id="np_colors">
+            <div class="c-dot sel" style="background:#E3F2FD" data-c="#E3F2FD" onclick="pickColor(this,'np_colors')"></div>
+            <div class="c-dot" style="background:#E8F5E9" data-c="#E8F5E9" onclick="pickColor(this,'np_colors')"></div>
+            <div class="c-dot" style="background:#FFF3E0" data-c="#FFF3E0" onclick="pickColor(this,'np_colors')"></div>
+            <div class="c-dot" style="background:#FCE4EC" data-c="#FCE4EC" onclick="pickColor(this,'np_colors')"></div>
+            <div class="c-dot" style="background:#ECEFF1" data-c="#ECEFF1" onclick="pickColor(this,'np_colors')"></div>
+            <div class="c-dot" style="background:#F3E5F5" data-c="#F3E5F5" onclick="pickColor(this,'np_colors')"></div>
+            <div class="c-dot" style="background:#E0F2F1" data-c="#E0F2F1" onclick="pickColor(this,'np_colors')"></div>
+            <div class="c-dot" style="background:#FFF8E1" data-c="#FFF8E1" onclick="pickColor(this,'np_colors')"></div>
+          </div>
+        </div>
+        <div class="field-group">
+          <label class="field-label">الأيقونة / Icon</label>
+          <div class="icon-row" id="np_icons">
+            <span class="i-opt sel" data-i="🔌" onclick="pickIcon(this,'np_icons')">🔌</span>
+            <span class="i-opt" data-i="💡" onclick="pickIcon(this,'np_icons')">💡</span>
+            <span class="i-opt" data-i="⚡" onclick="pickIcon(this,'np_icons')">⚡</span>
+            <span class="i-opt" data-i="🔧" onclick="pickIcon(this,'np_icons')">🔧</span>
+            <span class="i-opt" data-i="🔩" onclick="pickIcon(this,'np_icons')">🔩</span>
+            <span class="i-opt" data-i="🚿" onclick="pickIcon(this,'np_icons')">🚿</span>
+            <span class="i-opt" data-i="💧" onclick="pickIcon(this,'np_icons')">💧</span>
+            <span class="i-opt" data-i="🛠️" onclick="pickIcon(this,'np_icons')">🛠️</span>
+            <span class="i-opt" data-i="🔨" onclick="pickIcon(this,'np_icons')">🔨</span>
+            <span class="i-opt" data-i="🏠" onclick="pickIcon(this,'np_icons')">🏠</span>
+            <span class="i-opt" data-i="🔑" onclick="pickIcon(this,'np_icons')">🔑</span>
+            <span class="i-opt" data-i="🪚" onclick="pickIcon(this,'np_icons')">🪚</span>
+          </div>
+        </div>
+        <button class="save-btn" onclick="addProduct()"><span class="ar-text">إضافة المنتج +</span><span class="en-text">Add product +</span></button>
+      </div>
+
+      <!-- TAB: Add Service -->
+      <div class="tab-pane" id="t-svc">
+        <div class="field-group"><label class="field-label">اسم الخدمة بالعربية</label><input class="field-input" id="ns_ar" placeholder="مثال: تركيب كهربائي"/></div>
+        <div class="field-group"><label class="field-label">Service name English</label><input class="field-input" id="ns_en" placeholder="e.g. Electrical installation"/></div>
+        <div class="field-group"><label class="field-label">الوصف بالعربية</label><input class="field-input" id="ns_desc_ar" placeholder="وصف قصير للخدمة"/></div>
+        <div class="field-group"><label class="field-label">Description English</label><input class="field-input" id="ns_desc_en" placeholder="Short description"/></div>
+        <div class="field-group">
+          <label class="field-label">لون الأيقونة / Icon color</label>
+          <div class="color-row" id="ns_colors">
+            <div class="c-dot sel" style="background:#E3F2FD" data-c="#E3F2FD" onclick="pickColor(this,'ns_colors')"></div>
+            <div class="c-dot" style="background:#E8F5E9" data-c="#E8F5E9" onclick="pickColor(this,'ns_colors')"></div>
+            <div class="c-dot" style="background:#FFF8E1" data-c="#FFF8E1" onclick="pickColor(this,'ns_colors')"></div>
+            <div class="c-dot" style="background:#FCE4EC" data-c="#FCE4EC" onclick="pickColor(this,'ns_colors')"></div>
+            <div class="c-dot" style="background:#F3E5F5" data-c="#F3E5F5" onclick="pickColor(this,'ns_colors')"></div>
+          </div>
+        </div>
+        <div class="field-group">
+          <label class="field-label">الأيقونة / Icon</label>
+          <div class="icon-row" id="ns_icons">
+            <span class="i-opt sel" data-i="⚡" onclick="pickIcon(this,'ns_icons')">⚡</span>
+            <span class="i-opt" data-i="🔧" onclick="pickIcon(this,'ns_icons')">🔧</span>
+            <span class="i-opt" data-i="💡" onclick="pickIcon(this,'ns_icons')">💡</span>
+            <span class="i-opt" data-i="🏠" onclick="pickIcon(this,'ns_icons')">🏠</span>
+            <span class="i-opt" data-i="📦" onclick="pickIcon(this,'ns_icons')">📦</span>
+            <span class="i-opt" data-i="🛠️" onclick="pickIcon(this,'ns_icons')">🛠️</span>
+            <span class="i-opt" data-i="🚿" onclick="pickIcon(this,'ns_icons')">🚿</span>
+            <span class="i-opt" data-i="🔌" onclick="pickIcon(this,'ns_icons')">🔌</span>
+          </div>
+        </div>
+        <button class="save-btn" onclick="addService()"><span class="ar-text">إضافة الخدمة +</span><span class="en-text">Add service +</span></button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Edit Product Popup -->
+<div class="overlay" id="EDIT_PROD_OV" onclick="if(event.target===this)this.classList.remove('open')">
+  <div class="panel" style="max-width:400px;">
+    <div class="panel-head"><div class="panel-title">✏️ <span class="ar-text">تعديل المنتج</span><span class="en-text">Edit product</span></div><button class="close-btn" onclick="document.getElementById('EDIT_PROD_OV').classList.remove('open')">×</button></div>
+    <div class="panel-body">
+      <input type="hidden" id="ep_id"/>
+      <div class="field-group"><label class="field-label">الاسم بالعربية</label><input class="field-input" id="ep_ar"/></div>
+      <div class="field-group"><label class="field-label">Name English</label><input class="field-input" id="ep_en"/></div>
+      <div class="field-group"><label class="field-label">التصنيف AR</label><input class="field-input" id="ep_cat_ar"/></div>
+      <div class="field-group"><label class="field-label">Category EN</label><input class="field-input" id="ep_cat_en"/></div>
+      <div class="field-group">
+        <label class="field-label">لون / Color</label>
+        <div class="color-row" id="ep_colors">
+          <div class="c-dot sel" style="background:#E3F2FD" data-c="#E3F2FD" onclick="pickColor(this,'ep_colors')"></div>
+          <div class="c-dot" style="background:#E8F5E9" data-c="#E8F5E9" onclick="pickColor(this,'ep_colors')"></div>
+          <div class="c-dot" style="background:#FFF3E0" data-c="#FFF3E0" onclick="pickColor(this,'ep_colors')"></div>
+          <div class="c-dot" style="background:#FCE4EC" data-c="#FCE4EC" onclick="pickColor(this,'ep_colors')"></div>
+          <div class="c-dot" style="background:#ECEFF1" data-c="#ECEFF1" onclick="pickColor(this,'ep_colors')"></div>
+          <div class="c-dot" style="background:#F3E5F5" data-c="#F3E5F5" onclick="pickColor(this,'ep_colors')"></div>
+          <div class="c-dot" style="background:#E0F2F1" data-c="#E0F2F1" onclick="pickColor(this,'ep_colors')"></div>
+          <div class="c-dot" style="background:#FFF8E1" data-c="#FFF8E1" onclick="pickColor(this,'ep_colors')"></div>
+        </div>
+      </div>
+      <div class="field-group">
+        <label class="field-label">أيقونة / Icon</label>
+        <div class="icon-row" id="ep_icons">
+          <span class="i-opt" data-i="🔌" onclick="pickIcon(this,'ep_icons')">🔌</span>
+          <span class="i-opt" data-i="💡" onclick="pickIcon(this,'ep_icons')">💡</span>
+          <span class="i-opt" data-i="⚡" onclick="pickIcon(this,'ep_icons')">⚡</span>
+          <span class="i-opt" data-i="🔧" onclick="pickIcon(this,'ep_icons')">🔧</span>
+          <span class="i-opt" data-i="🔩" onclick="pickIcon(this,'ep_icons')">🔩</span>
+          <span class="i-opt" data-i="🚿" onclick="pickIcon(this,'ep_icons')">🚿</span>
+          <span class="i-opt" data-i="💧" onclick="pickIcon(this,'ep_icons')">💧</span>
+          <span class="i-opt" data-i="🛠️" onclick="pickIcon(this,'ep_icons')">🛠️</span>
+          <span class="i-opt" data-i="🔨" onclick="pickIcon(this,'ep_icons')">🔨</span>
+          <span class="i-opt" data-i="🏠" onclick="pickIcon(this,'ep_icons')">🏠</span>
+          <span class="i-opt" data-i="🔑" onclick="pickIcon(this,'ep_icons')">🔑</span>
+          <span class="i-opt" data-i="🪚" onclick="pickIcon(this,'ep_icons')">🪚</span>
+        </div>
+      </div>
+      <div style="display:flex;gap:10px;">
+        <button class="save-btn" style="flex:1;" onclick="saveProduct()"><span class="ar-text">حفظ ✓</span><span class="en-text">Save ✓</span></button>
+        <button class="del-btn" style="padding:11px 16px;" onclick="deleteCard('prod')"><span class="ar-text">حذف</span><span class="en-text">Delete</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Edit Service Popup -->
+<div class="overlay" id="EDIT_SVC_OV" onclick="if(event.target===this)this.classList.remove('open')">
+  <div class="panel" style="max-width:400px;">
+    <div class="panel-head"><div class="panel-title">✏️ <span class="ar-text">تعديل الخدمة</span><span class="en-text">Edit service</span></div><button class="close-btn" onclick="document.getElementById('EDIT_SVC_OV').classList.remove('open')">×</button></div>
+    <div class="panel-body">
+      <input type="hidden" id="es_id"/>
+      <div class="field-group"><label class="field-label">اسم الخدمة AR</label><input class="field-input" id="es_ar"/></div>
+      <div class="field-group"><label class="field-label">Service name EN</label><input class="field-input" id="es_en"/></div>
+      <div class="field-group"><label class="field-label">الوصف AR</label><input class="field-input" id="es_desc_ar"/></div>
+      <div class="field-group"><label class="field-label">Description EN</label><input class="field-input" id="es_desc_en"/></div>
+      <div class="field-group">
+        <label class="field-label">لون / Color</label>
+        <div class="color-row" id="es_colors">
+          <div class="c-dot sel" style="background:#E3F2FD" data-c="#E3F2FD" onclick="pickColor(this,'es_colors')"></div>
+          <div class="c-dot" style="background:#E8F5E9" data-c="#E8F5E9" onclick="pickColor(this,'es_colors')"></div>
+          <div class="c-dot" style="background:#FFF8E1" data-c="#FFF8E1" onclick="pickColor(this,'es_colors')"></div>
+          <div class="c-dot" style="background:#FCE4EC" data-c="#FCE4EC" onclick="pickColor(this,'es_colors')"></div>
+          <div class="c-dot" style="background:#F3E5F5" data-c="#F3E5F5" onclick="pickColor(this,'es_colors')"></div>
+        </div>
+      </div>
+      <div class="field-group">
+        <label class="field-label">أيقونة / Icon</label>
+        <div class="icon-row" id="es_icons">
+          <span class="i-opt" data-i="⚡" onclick="pickIcon(this,'es_icons')">⚡</span>
+          <span class="i-opt" data-i="🔧" onclick="pickIcon(this,'es_icons')">🔧</span>
+          <span class="i-opt" data-i="💡" onclick="pickIcon(this,'es_icons')">💡</span>
+          <span class="i-opt" data-i="🏠" onclick="pickIcon(this,'es_icons')">🏠</span>
+          <span class="i-opt" data-i="📦" onclick="pickIcon(this,'es_icons')">📦</span>
+          <span class="i-opt" data-i="🛠️" onclick="pickIcon(this,'es_icons')">🛠️</span>
+          <span class="i-opt" data-i="🚿" onclick="pickIcon(this,'es_icons')">🚿</span>
+          <span class="i-opt" data-i="🔌" onclick="pickIcon(this,'es_icons')">🔌</span>
+        </div>
+      </div>
+      <div style="display:flex;gap:10px;">
+        <button class="save-btn" style="flex:1;" onclick="saveService()"><span class="ar-text">حفظ ✓</span><span class="en-text">Save ✓</span></button>
+        <button class="del-btn" style="padding:11px 16px;" onclick="deleteCard('svc')"><span class="ar-text">حذف</span><span class="en-text">Delete</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ── Language ── */
+function setLang(l) {
+  var b = document.getElementById('BODY');
+  b.classList.toggle('en', l==='en');
+  b.setAttribute('dir', l==='en'?'ltr':'rtl');
+  b.setAttribute('lang', l);
+  document.getElementById('btn-ar').classList.toggle('active', l==='ar');
+  document.getElementById('btn-en').classList.toggle('active', l==='en');
+}
+
+/* ── Panel ── */
+function openPanel() { document.getElementById('MAIN_OVERLAY').classList.add('open'); }
+function closePanel() { document.getElementById('MAIN_OVERLAY').classList.remove('open'); }
+function showTab(id) {
+  document.querySelectorAll('.tab-pane').forEach(function(p){ p.classList.remove('active'); });
+  document.querySelectorAll('.ptab').forEach(function(t){ t.classList.remove('active'); });
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+}
+
+/* ── Color & Icon pickers ── */
+function pickColor(el, group) {
+  document.querySelectorAll('#'+group+' .c-dot').forEach(function(d){ d.classList.remove('sel'); });
+  el.classList.add('sel');
+}
+function pickIcon(el, group) {
+  document.querySelectorAll('#'+group+' .i-opt').forEach(function(i){ i.classList.remove('sel'); });
+  el.classList.add('sel');
+}
+function getSelected(group, attr) {
+  var el = document.querySelector('#'+group+' .'+(attr==='data-c'?'c-dot':'i-opt')+'.sel');
+  return el ? el.getAttribute(attr) : '';
+}
+
+/* ── Save Info ── */
+function saveInfo() {
+  var nameAr = document.getElementById('f_name_ar').value;
+  var nameEn = document.getElementById('f_name_en').value;
+  var phone = document.getElementById('f_phone').value;
+  var addrAr = document.getElementById('f_addr_ar').value;
+  var addrEn = document.getElementById('f_addr_en').value;
+  var badge = document.getElementById('f_badge').value;
+
+  document.getElementById('SHOP_NAME_AR').textContent = nameAr;
+  document.getElementById('SHOP_NAME_EN').textContent = nameEn;
+  document.getElementById('FOOTER_NAME_AR').textContent = nameAr;
+  document.getElementById('FOOTER_NAME_EN').textContent = nameEn;
+  document.getElementById('HERO_BADGE').textContent = badge;
+
+  var ph = document.getElementById('CONTACT_PHONE_LINK');
+  ph.href = 'tel:' + phone;
+  ph.textContent = phone;
+  document.getElementById('FOOTER_PHONE').textContent = phone;
+  document.getElementById('HERO_PHONE_LINK').href = 'tel:' + phone;
+
+  var wa = 'https://wa.me/966' + phone.replace(/^0/, '');
+  document.getElementById('CONTACT_WA_LINK').href = wa;
+  document.getElementById('CONTACT_WA_LINK').textContent = phone;
+  document.getElementById('WA_FLOAT').href = wa;
+  document.getElementById('HERO_WA_LINK').href = wa;
+
+  var addrEl = document.getElementById('CONTACT_ADDRESS');
+  addrEl.innerHTML = '<span class="ar-text">'+addrAr+'</span><span class="en-text">'+addrEn+'</span>';
+
+  closePanel();
+  flash('تم الحفظ ✓ / Saved ✓');
+}
+
+/* ── Save Stats ── */
+function saveStats() {
+  document.getElementById('STAT1_NUM').textContent = document.getElementById('f_s1num').value;
+  document.getElementById('STAT1_AR').textContent = document.getElementById('f_s1ar').value;
+  document.getElementById('STAT1_EN').textContent = document.getElementById('f_s1en').value;
+  document.getElementById('STAT2_NUM').textContent = document.getElementById('f_s2num').value;
+  document.getElementById('STAT2_AR').textContent = document.getElementById('f_s2ar').value;
+  document.getElementById('STAT2_EN').textContent = document.getElementById('f_s2en').value;
+  document.getElementById('STAT3_NUM').textContent = document.getElementById('f_s3num').value;
+  document.getElementById('STAT3_AR').textContent = document.getElementById('f_s3ar').value;
+  document.getElementById('STAT3_EN').textContent = document.getElementById('f_s3en').value;
+  closePanel(); flash('تم الحفظ ✓ / Saved ✓');
+}
+
+/* ── Save Hours ── */
+function saveHours() {
+  document.getElementById('HOURS_WEEKDAYS_AR').textContent = document.getElementById('f_wdAR').value;
+  document.getElementById('HOURS_WEEKDAYS_EN').textContent = document.getElementById('f_wdEN').value;
+  document.getElementById('HOURS_FRIDAY_AR').textContent = document.getElementById('f_frAR').value;
+  document.getElementById('HOURS_FRIDAY_EN').textContent = document.getElementById('f_frEN').value;
+  closePanel(); flash('تم الحفظ ✓ / Saved ✓');
+}
+
+/* ── Add Product ── */
+function addProduct() {
+  var ar = document.getElementById('np_ar').value.trim();
+  var en = document.getElementById('np_en').value.trim();
+  var catVal = document.getElementById('np_cat').value;
+  if (!ar || !en) { alert('الرجاء تعبئة الاسم / Please enter name'); return; }
+  var cat = catVal.split('|');
+  var color = getSelected('np_colors','data-c') || '#E3F2FD';
+  var icon = getSelected('np_icons','data-i') || '🔌';
+  var id = 'pd_' + Date.now();
+
+  var card = document.createElement('div');
+  card.className = 'prod-card';
+  card.setAttribute('data-id', id);
+  card.innerHTML =
+    '<button class="edit-btn" onclick="openEditProduct(\''+id+'\')">✏️</button>'+
+    '<div class="prod-img" style="background:'+color+'"><span style="font-size:30px;">'+icon+'</span></div>'+
+    '<div class="prod-body">'+
+      '<div class="prod-name"><span class="ar-text">'+ar+'</span><span class="en-text">'+en+'</span></div>'+
+      '<div class="prod-cat"><span class="ar-text">'+cat[0]+'</span><span class="en-text">'+cat[1]+'</span></div>'+
+    '</div>';
+  document.getElementById('PRODUCTS_GRID').appendChild(card);
+
+  document.getElementById('np_ar').value='';
+  document.getElementById('np_en').value='';
+  closePanel();
+  document.getElementById('products').scrollIntoView({behavior:'smooth'});
+  flash('تمت الإضافة ✓ / Added ✓');
+}
+
+/* ── Add Service ── */
+function addService() {
+  var ar = document.getElementById('ns_ar').value.trim();
+  var en = document.getElementById('ns_en').value.trim();
+  var descAr = document.getElementById('ns_desc_ar').value.trim();
+  var descEn = document.getElementById('ns_desc_en').value.trim();
+  if (!ar || !en) { alert('الرجاء تعبئة الاسم / Please enter name'); return; }
+  var color = getSelected('ns_colors','data-c') || '#E3F2FD';
+  var icon = getSelected('ns_icons','data-i') || '⚡';
+  var id = 'sv_' + Date.now();
+
+  var card = document.createElement('div');
+  card.className = 'svc-card';
+  card.setAttribute('data-id', id);
+  card.innerHTML =
+    '<button class="edit-btn" onclick="openEditService(\''+id+'\')">✏️ <span class="ar-text">تعديل</span><span class="en-text">Edit</span></button>'+
+    '<div class="svc-icon" style="background:'+color+';">'+icon+'</div>'+
+    '<div class="svc-title"><span class="ar-text">'+ar+'</span><span class="en-text">'+en+'</span></div>'+
+    '<div class="svc-desc"><span class="ar-text">'+descAr+'</span><span class="en-text">'+descEn+'</span></div>';
+  document.getElementById('SERVICES_GRID').appendChild(card);
+
+  document.getElementById('ns_ar').value='';
+  document.getElementById('ns_en').value='';
+  document.getElementById('ns_desc_ar').value='';
+  document.getElementById('ns_desc_en').value='';
+  closePanel();
+  document.getElementById('services').scrollIntoView({behavior:'smooth'});
+  flash('تمت الإضافة ✓ / Added ✓');
+}
+
+/* ── Edit Product ── */
+function openEditProduct(id) {
+  var card = document.querySelector('[data-id="'+id+'"]');
+  if (!card) return;
+  document.getElementById('ep_id').value = id;
+  document.getElementById('ep_ar').value = card.querySelector('.prod-name .ar-text').textContent;
+  document.getElementById('ep_en').value = card.querySelector('.prod-name .en-text').textContent;
+  document.getElementById('ep_cat_ar').value = card.querySelector('.prod-cat .ar-text').textContent;
+  document.getElementById('ep_cat_en').value = card.querySelector('.prod-cat .en-text').textContent;
+  document.getElementById('EDIT_PROD_OV').classList.add('open');
+}
+function saveProduct() {
+  var id = document.getElementById('ep_id').value;
+  var card = document.querySelector('[data-id="'+id+'"]');
+  if (!card) return;
+  card.querySelector('.prod-name .ar-text').textContent = document.getElementById('ep_ar').value;
+  card.querySelector('.prod-name .en-text').textContent = document.getElementById('ep_en').value;
+  card.querySelector('.prod-cat .ar-text').textContent = document.getElementById('ep_cat_ar').value;
+  card.querySelector('.prod-cat .en-text').textContent = document.getElementById('ep_cat_en').value;
+  var color = getSelected('ep_colors','data-c');
+  var icon = getSelected('ep_icons','data-i');
+  if (color) card.querySelector('.prod-img').style.background = color;
+  if (icon) card.querySelector('.prod-img span').textContent = icon;
+  document.getElementById('EDIT_PROD_OV').classList.remove('open');
+  flash('تم الحفظ ✓ / Saved ✓');
+}
+
+/* ── Edit Service ── */
+function openEditService(id) {
+  var card = document.querySelector('[data-id="'+id+'"]');
+  if (!card) return;
+  document.getElementById('es_id').value = id;
+  document.getElementById('es_ar').value = card.querySelector('.svc-title .ar-text').textContent;
+  document.getElementById('es_en').value = card.querySelector('.svc-title .en-text').textContent;
+  document.getElementById('es_desc_ar').value = card.querySelector('.svc-desc .ar-text').textContent;
+  document.getElementById('es_desc_en').value = card.querySelector('.svc-desc .en-text').textContent;
+  document.getElementById('EDIT_SVC_OV').classList.add('open');
+}
+function saveService() {
+  var id = document.getElementById('es_id').value;
+  var card = document.querySelector('[data-id="'+id+'"]');
+  if (!card) return;
+  card.querySelector('.svc-title .ar-text').textContent = document.getElementById('es_ar').value;
+  card.querySelector('.svc-title .en-text').textContent = document.getElementById('es_en').value;
+  card.querySelector('.svc-desc .ar-text').textContent = document.getElementById('es_desc_ar').value;
+  card.querySelector('.svc-desc .en-text').textContent = document.getElementById('es_desc_en').value;
+  var color = getSelected('es_colors','data-c');
+  var icon = getSelected('es_icons','data-i');
+  if (color) card.querySelector('.svc-icon').style.background = color;
+  if (icon) card.querySelector('.svc-icon').textContent = icon;
+  document.getElementById('EDIT_SVC_OV').classList.remove('open');
+  flash('تم الحفظ ✓ / Saved ✓');
+}
+
+/* ── Delete ── */
+function deleteCard(type) {
+  var id = document.getElementById(type==='prod'?'ep_id':'es_id').value;
+  var card = document.querySelector('[data-id="'+id+'"]');
+  if (card) card.remove();
+  document.getElementById(type==='prod'?'EDIT_PROD_OV':'EDIT_SVC_OV').classList.remove('open');
+  flash('تم الحذف / Deleted');
+}
+
+/* ── Flash message ── */
+function flash(msg) {
+  var el = document.createElement('div');
+  el.textContent = msg;
+  el.style.cssText = 'position:fixed;bottom:160px;left:50%;transform:translateX(-50%);background:#0B2545;color:white;padding:10px 22px;border-radius:20px;font-family:Cairo,sans-serif;font-size:13px;font-weight:600;z-index:9999;box-shadow:0 4px 14px rgba(0,0,0,0.2);';
+  document.body.appendChild(el);
+  setTimeout(function(){ el.remove(); }, 2200);
+}
+</script>
+</body>
+</html>
